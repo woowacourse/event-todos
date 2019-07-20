@@ -13,6 +13,6 @@
 
 ```npm install -g live-server```
 
-실행은 아래의 커맨드로 할 수 있다.
+실행은 아래의 커맨드로 할 수 있습니다.
 
 ``` live-server 폴더명 ```
