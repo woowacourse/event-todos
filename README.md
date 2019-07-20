@@ -2,7 +2,6 @@
 이 템플릿은 javascript event에 대해 학습하기 위한 todo list입니다.
 기본적으로 controller와 service가 구현되어 있으며, 실제 이벤트를 바인딩하고 리스닝하는 부분은 직접 구현해야 합니다.
 
-
 ## Getting Started
 #### Tip 로컬에서 서버 띄워서 확인하는 방법
 
