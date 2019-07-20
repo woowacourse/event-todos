@@ -1,11 +1,15 @@
-# event-todos
+# Vanilla JavaScript Event Todos
 이 템플릿은 javascript event에 대해 학습하기 위한 todo list입니다.
 기본적으로 controller와 service가 구현되어 있으며, 실제 이벤트를 바인딩하고 리스닝하는 부분은 직접 구현해야 합니다.
 
 
-## Tip 로컬에서 서버 띄워서 확인하는 방법
+## Getting Started
+#### Tip 로컬에서 서버 띄워서 확인하는 방법
 
-로컬에서 웹서버를 띄워 html, js 등을 테스트하고 싶은데 nginx나 apache를 깔고 설정하고 하는 것이 번거롭다면 아래의 라이브러리를 이용하면 수 초만에 웹서버를 띄우고 작성한 코드를 테스트해볼 수 있다.
+로컬에서 웹서버를 띄워 html, js 등을 실시간으로 손쉽게 테스트해볼 수 있습니다.
+이를 위해서는 우선 npm이 설치되어 있어야 합니다.
+구글에 ```npm install``` 이란 키워드로 각자의 운영체제에 맞게끔 npm을 설치해주세요.
+이후 아래의 명령어를 통해 실시간으로 웹페이지를 테스트해볼 수 있습니다.
 
 ```npm install -g live-server```
 
