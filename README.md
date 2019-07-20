@@ -1,6 +1,5 @@
 # Vanilla JavaScript Event Todos
-![ezgif-4-093c6b5a523c](https://user-images.githubusercontent.com/50367798/61579435-fa2c3000-ab3f-11e9-85b0-c9486de7e678.gif)
-
+![ezgif-4-34b6fe1ab2ac](https://user-images.githubusercontent.com/50367798/61579463-568f4f80-ab40-11e9-8b34-5ca76a61de8b.gif)
 이 템플릿은 javascript event에 대해 학습하기 위한 todo list입니다.
 기본적으로 controller와 service가 구현되어 있으며, 실제 이벤트를 바인딩하고 리스닝하는 부분은 직접 구현해야 합니다.
 
