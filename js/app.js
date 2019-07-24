@@ -1,45 +1,58 @@
 const TODOAPP = (function () {
     'use strict';
 
+    const ENTER_KEY = 13
+    const ESC_KEY = 27
     const todoTemplate =
         "<li>"+
-            "<div class=\"view\">"+
-                "<input class=\"toggle\" type=\"checkbox\">"+
-                "<label class='label'>{{todoTitle}}</label>"+
-                "<button class=\"destroy\"></button>"+
-            "</div>"+
-            "<input class=\"edit\" value=\"{{todoTitle}}\">"+
-        "</li>";
+        "<div class=\"view\">"+
+        "<input class=\"toggle\" type=\"checkbox\">"+
+        "<label class='label'>{{todoTitle}}</label>"+
+        "<button class=\"destroy\"></button>"+
+        "</div>"+
+        "<input class=\"edit\" value=\"{{todoTitle}}\">"+
+        "</li>"
 
     const todoItemTemplate = Handlebars.compile(todoTemplate);
 
-    //todo 컨트롤러에 각 이벤트에 해당하는 이벤트 리스너를 등록해야한다.
     const TodoController = function () {
         const todoService = new TodoService()
+        const todoList = document.getElementById('todo-list')
 
-        const addTodo = function () {
+        const canAddTodo = function () {
             const todoTitle = document.getElementById('new-todo-title')
             todoTitle.addEventListener('keydown', todoService.add)
         }
 
-        //todo 리스트 앞의 체크박스를 클릭했을 떄 완료된 표시를 해줘야 한다.
-        const completeTodo = function () {
-        };
+        const canCompleteTodo = function () {
+            todoList.addEventListener('click', function (event) {
+                if (event.target.classList.contains('toggle')) {
+                    todoService.toggle(event)
+                }
+            })
+        }
 
-        //todo 리스트에서 x버튼을 눌렀을 때 삭제 할 수 있어야 한다.
-        const deleteTodo = function () {
-        };
+        const canDeleteTodo = function () {
+            todoList.addEventListener('click', function (event) {
+                if (event.target.classList.contains('destroy')) {
+                    todoService.destroy(event)
+                }
+            })
+        }
 
-        //todo 리스트의 타이틀을 변경할 수 있어야 한다.
-        const updateTodo = function () {
-
+        const canUpdateTodo = function () {
+            todoList.addEventListener('dblclick', function (event) {
+                if (event.target.classList.contains('label')) {
+                    todoService.focus(event)
+                }
+            })
         }
 
         const init = function () {
-            addTodo()
-            completeTodo()
-            deleteTodo()
-            updateTodo()
+            canAddTodo()
+            canCompleteTodo()
+            canDeleteTodo()
+            canUpdateTodo()
         }
 
         return {
@@ -52,14 +65,46 @@ const TODOAPP = (function () {
         const add = function (event) {
             const todoTitle = event.target.value
             const todoList = document.getElementById('todo-list')
-            if (event.which === 13 && todoTitle !== ''){
+            if (event.which === ENTER_KEY && todoTitle !== ''){
                 todoList.insertAdjacentHTML('beforeend', todoItemTemplate({"todoTitle":todoTitle}))
                 event.target.value = ''
             }
         }
 
+        const destroy = function (event) {
+            const result = confirm("정말로 삭제하시겠습니까?");
+            if (result === true) {
+                event.target.parentElement.parentElement.remove()
+            }
+        }
+
+        const toggle = function (event) {
+            event.target.parentElement.parentElement.classList.toggle('completed')
+        }
+
+        const focus = function (event) {
+            const updatedElement = event.target.closest('li')
+            updatedElement.classList.toggle('editing')
+            updatedElement.addEventListener('keydown', update)
+        }
+
+        const update = function (event) {
+            const updatedElement = event.target.closest('li')
+            const inputValue = updatedElement.querySelector('input.edit').value
+            if (event.which === ESC_KEY) {
+                updatedElement.classList.toggle('editing')
+            }
+            if (event.which === ENTER_KEY && inputValue !== ''){
+                updatedElement.querySelector('label').innerText = inputValue
+                updatedElement.classList.toggle('editing')
+            }
+        }
+
         return {
-            add:add
+            add:add,
+            toggle:toggle,
+            destroy:destroy,
+            focus: focus
         }
     }
 
