@@ -50,6 +50,12 @@ const TODOAPP = (function () {
 
     const TodoService = function () {
         const add = function (event) {
+            const todoTitle = event.target.value
+            const todoList = document.getElementById('todo-list')
+            if (event.which === 13 && todoTitle !== ''){
+                todoList.insertAdjacentHTML('beforeend', todoItemTemplate({"todoTitle":todoTitle}))
+                event.target.value = ''
+            }
         }
 
         return {
